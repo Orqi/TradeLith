@@ -1,0 +1,42 @@
+{
+    "timestamp": "2025-06-19 17:22:45",
+    "stock_states": {
+        "GRSE.NS": {
+            "last_ai_signal": "SELL (AI)",
+            "current_price": 3138.89990234375,
+            "in_buy_position": false,
+            "entry_price": null,
+            "stop_loss_price": null,
+            "high_since_entry": null,
+            "last_notification_price": 3138.89990234375
+        },
+        "ZENTEC.NS": {
+            "last_ai_signal": "Hold (AI)",
+            "current_price": 1894.0999755859375,
+            "in_buy_position": false,
+            "entry_price": null,
+            "stop_loss_price": null,
+            "high_since_entry": null,
+            "last_notification_price": 1894.0999755859375
+        },
+        "YESBANK.NS": {
+            "last_ai_signal": "Hold (AI)",
+            "current_price": 19.40999984741211,
+            "in_buy_position": false,
+            "entry_price": null,
+            "stop_loss_price": null,
+            "high_since_entry": null,
+            "last_notification_price": 19.40999984741211
+        },
+        "KITEX.NS": {
+            "last_ai_signal": "SELL (AI)",
+            "current_price": 252.5500030517578,
+            "in_buy_position": false,
+            "entry_price": null,
+            "stop_loss_price": null,
+            "high_since_entry": null,
+            "last_notification_price": 252.5500030517578
+        }
+    },
+    "trade_log": []
+}
