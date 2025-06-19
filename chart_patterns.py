@@ -1,0 +1,2 @@
+
+I want my code to analyze stuff like pe ratio book value market cap, also chart indicators a lot of them , also detect chart patterns a lot of them and also get news from alpha vantage also combine and use ai model to take decision from info all of them an provide output, like I need if something in buy range I need wht price to buy ,stoplsos when to sell it off, in sell range wht price to sell an stuff similar hold till how long an dstoploss yk so give update fullcode
