@@ -1,14 +1,10 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const stockStatesContainer = document.getElementById('stock-states-container');
     const tradeLogTableBody = document.getElementById('trade-log-table-body');
     const lastUpdatedSpan = document.getElementById('last-updated');
     const loadingMessage = document.getElementById('loading-message');
     const errorMessage = document.getElementById('error-message');
-    
-    // New elements for the buttons and modal
-    // const trainBotBtn = document.getElementById('trainBotBtn'); // Removed
+   
     const monitorBotBtn = document.getElementById('monitorBotBtn');
     const stopMonitorBtn = document.getElementById('stopMonitorBtn');
     const statusModal = document.getElementById('statusModal');
@@ -16,11 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMessage = document.getElementById('modalMessage');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
-    // Base URL for your Flask backend.
-    const API_BASE_URL = ''; // Flask is serving everything from the root '/'
+    const API_BASE_URL = '';
 
-
-    // Function to show the custom modal
     function showModal(title, message, isError = false) {
         modalTitle.textContent = title;
         modalMessage.innerHTML = message;
@@ -32,12 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
         statusModal.classList.remove('hidden');
     }
 
-    // Function to hide the custom modal
     function hideModal() {
         statusModal.classList.add('hidden');
     }
 
-    // Function to make API calls to the Flask backend
     async function callBackend(endpoint, method = 'POST') {
         try {
             const response = await fetch(`${API_BASE_URL}/api/${endpoint}`, { method: method });
@@ -54,13 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event listeners for the buttons
-    // Removed trainBotBtn.addEventListener as requested
-    // trainBotBtn.addEventListener('click', () => {
-    //     showModal('Initiating Training...', 'Sending request to the backend. Please check your terminal for bot logs.');
-    //     callBackend('train');
-    // });
-
     monitorBotBtn.addEventListener('click', () => {
         showModal('Starting Monitor...', 'Sending request to the backend. The dashboard will start updating shortly.');
         callBackend('monitor');
@@ -71,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         callBackend('stop_monitor');
     });
 
-    // Event listener for closing the modal
     closeModalBtn.addEventListener('click', hideModal);
     statusModal.addEventListener('click', (event) => {
         if (event.target === statusModal) {
@@ -80,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Function to fetch and display data
     async function fetchData() {
         if (statusModal.classList.contains('hidden')) {
             loadingMessage.classList.remove('hidden');
@@ -90,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // Fetch the output.json file from the Flask backend's API endpoint
             const response = await fetch(`${API_BASE_URL}/api/output.json`);
             
             if (!response.ok) {
@@ -170,9 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Fetch data initially
+
     fetchData();
 
-    // Refresh data every 10 seconds (adjust as needed)
+    // every 10 seconds refresh
     setInterval(fetchData, 10000); 
 });

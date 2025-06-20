@@ -1,4 +1,3 @@
-# output_writer.py
 import json
 import os
 import numpy as np
@@ -8,7 +7,6 @@ from datetime import datetime
 from config import WEB_UI_OUTPUT_PATH, VERBOSE_MODE
 
 def convert_numpy_types(obj):
-    """Recursively converts NumPy types to native Python types for JSON serialization."""
     if isinstance(obj, np.integer):
         return int(obj)
     elif isinstance(obj, np.floating):
@@ -26,9 +24,7 @@ def convert_numpy_types(obj):
     return obj
 
 def save_output_to_json(stock_states: dict, trade_log: list):
-    """
-    Saves the current stock states and trade log to a JSON file for the web UI.
-    """
+ 
     output_data = {
         'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'stock_states': stock_states,

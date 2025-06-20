@@ -1,42 +1,85 @@
 {
-    "timestamp": "2025-06-19 17:22:45",
+    "timestamp": "2025-06-20 16:26:52",
     "stock_states": {
         "GRSE.NS": {
-            "last_ai_signal": "SELL (AI)",
-            "current_price": 3138.89990234375,
-            "in_buy_position": false,
-            "entry_price": null,
-            "stop_loss_price": null,
-            "high_since_entry": null,
-            "last_notification_price": 3138.89990234375
+            "last_ai_signal": "BUY (AI)",
+            "current_price": 3289.0,
+            "in_buy_position": true,
+            "entry_price": 3289.0,
+            "stop_loss_price": 3223.22,
+            "high_since_entry": 3289.0,
+            "last_notification_price": 3289.0
         },
         "ZENTEC.NS": {
-            "last_ai_signal": "Hold (AI)",
-            "current_price": 1894.0999755859375,
-            "in_buy_position": false,
-            "entry_price": null,
-            "stop_loss_price": null,
-            "high_since_entry": null,
-            "last_notification_price": 1894.0999755859375
+            "last_ai_signal": "BUY (AI)",
+            "current_price": 1900.0,
+            "in_buy_position": true,
+            "entry_price": 1900.0,
+            "stop_loss_price": 1862.0,
+            "high_since_entry": 1900.0,
+            "last_notification_price": 1900.0
         },
         "YESBANK.NS": {
             "last_ai_signal": "Hold (AI)",
-            "current_price": 19.40999984741211,
+            "current_price": 19.760000228881836,
             "in_buy_position": false,
             "entry_price": null,
             "stop_loss_price": null,
             "high_since_entry": null,
-            "last_notification_price": 19.40999984741211
+            "last_notification_price": 19.760000228881836
         },
         "KITEX.NS": {
             "last_ai_signal": "SELL (AI)",
-            "current_price": 252.5500030517578,
+            "current_price": 256.6499938964844,
             "in_buy_position": false,
             "entry_price": null,
             "stop_loss_price": null,
             "high_since_entry": null,
-            "last_notification_price": 252.5500030517578
+            "last_notification_price": 256.6499938964844
         }
     },
-    "trade_log": []
+    "trade_log": [
+        {
+            "timestamp": "2025-06-20 16:25:01",
+            "ticker": "GRSE.NS",
+            "type": "ENTER",
+            "entry_price": 3289.0,
+            "exit_price": null,
+            "p_l_percent": null,
+            "details": {
+                "signal": 1,
+                "entry_price": 3289.0,
+                "stop_loss": 3223.22,
+                "take_profit_1": 3387.67,
+                "take_profit_2": 3486.3400000000006,
+                "rationale": [
+                    "AI BUY SIGNAL",
+                    "Neutral News Sentiment (0.00)",
+                    "Detected Chart Patterns: has_triple_top",
+                    "Anticipated duration: Short-medium term (based on 1h data)"
+                ]
+            }
+        },
+        {
+            "timestamp": "2025-06-20 16:25:01",
+            "ticker": "ZENTEC.NS",
+            "type": "ENTER",
+            "entry_price": 1900.0,
+            "exit_price": null,
+            "p_l_percent": null,
+            "details": {
+                "signal": 1,
+                "entry_price": 1900.0,
+                "stop_loss": 1862.0,
+                "take_profit_1": 1957.0,
+                "take_profit_2": 2014.0,
+                "rationale": [
+                    "AI BUY SIGNAL",
+                    "Neutral News Sentiment (0.00)",
+                    "Detected Chart Patterns: has_triple_top",
+                    "Anticipated duration: Short-medium term (based on 1h data)"
+                ]
+            }
+        }
+    ]
 }

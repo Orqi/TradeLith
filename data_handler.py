@@ -1,4 +1,3 @@
-# data_handler.py
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -8,10 +7,7 @@ import logging
 from config import ALPHAVANTAGE_API_KEY, VERBOSE_MODE
 
 def fetch_data(ticker: str, period: str, interval: str) -> tuple[pd.DataFrame | None, dict, dict]:
-    """
-    Fetches historical OHLCV data from yfinance and current fundamental/news data from Alpha Vantage.
-    Returns: df (DataFrame), fundamental_data (dict), news_sentiment (dict)
-    """
+
     logging.info(f"  [Data Fetch] Fetching data for {ticker} (yfinance)...")
     df = yf.download(ticker, period=period, interval=interval, progress=False, auto_adjust=True)
 
@@ -45,7 +41,7 @@ def fetch_data(ticker: str, period: str, interval: str) -> tuple[pd.DataFrame | 
         return None, {}, {}
 
     fundamental_data = {}
-    news_sentiment_data = {} # Correctly named variable
+    news_sentiment_data = {}
 
     if ALPHAVANTAGE_API_KEY and ALPHAVANTAGE_API_KEY != "YOUR_ALPHA_VANTAGE_API_KEY":
         try:
@@ -101,5 +97,4 @@ def fetch_data(ticker: str, period: str, interval: str) -> tuple[pd.DataFrame | 
     else:
         logging.warning("  [Data Fetch] Alpha Vantage API Key not set or is a placeholder. Skipping fundamental and news data fetching.")
 
-    # Corrected return statement: use news_sentiment_data
     return df, fundamental_data, news_sentiment_data

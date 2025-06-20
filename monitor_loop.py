@@ -1,4 +1,3 @@
-# monitor_loop.py
 import time
 from datetime import datetime
 import logging
@@ -26,8 +25,8 @@ def run_monitor_loop():
     loaded_models = load_models_and_features()
 
     if not loaded_models:
-        logging.warning("WARNING: No trained models found. Cannot provide AI-driven signals. Please run 'train' mode first.")
-        logging.info("Exiting monitoring mode as no AI models are available.")
+        logging.warning("WARNING: No trained models found. Cannot provide signals. Please run 'train' mode first.")
+        logging.info("Exiting monitoring mode as no models are available.")
         return
 
     for ticker in STOCK_TICKERS:
@@ -45,7 +44,7 @@ def run_monitor_loop():
         stock_states[ticker]['entry_price'] = None
         stock_states[ticker]['stop_loss_price'] = None
         stock_states[ticker]['high_since_entry'] = None
-        stock_states[ticker]['last_notification_price'] = None # Forces first notification
+        stock_states[ticker]['last_notification_price'] = None
 
     try:
         while True:
@@ -149,7 +148,7 @@ def run_monitor_loop():
                     else:
                         if ai_signal != state['last_ai_signal'] or price_changed_significantly:
                             p_l_percent = (state['current_price'] - state['entry_price']) / state['entry_price'] * 100 if state['entry_price'] != 0 else 0
-                            notification_message = f"🟢 {ticker}: AI says {ai_signal}. Still in BUY position since {state['entry_price']:.2f}. Current: {state['current_price']:.2f} (SL: {state['stop_loss_price']:.2f}). Current P/L: {p_l_percent:.2f}%."
+                            notification_message = f"🟢 {ticker}:  {ai_signal}. Still in BUY position since {state['entry_price']:.2f}. Current: {state['current_price']:.2f} (SL: {state['stop_loss_price']:.2f}). Current P/L: {p_l_percent:.2f}%."
                             state['last_ai_signal'] = ai_signal
                             state['last_notification_price'] = state['current_price']
                             logging.info(f"{stock_update_time} {notification_message}")
@@ -164,7 +163,7 @@ def run_monitor_loop():
 
                             stop_loss = trade_details['stop_loss']
                             target_msg = f"TP1: {trade_details['take_profit_1']:.2f}, TP2: {trade_details['take_profit_2']:.2f}."
-                            notification_message = f"✅ {ticker}: AI BUY SIGNAL! Consider entering at {entry_price:.2f}. Set Initial Stop Loss at {stop_loss:.2f}. {target_msg} Rationale: {'; '.join(trade_details['rationale'])}"
+                            notification_message = f"✅ {ticker}: BUY SIGNAL! Consider entering at {entry_price:.2f}. Set Initial Stop Loss at {stop_loss:.2f}. {target_msg} Rationale: {'; '.join(trade_details['rationale'])}"
                             
                             record_trade(ticker, 'ENTER', entry_price, signal_time=current_check_time.strftime('%Y-%m-%d %H:%M:%S'), trade_details=trade_details)
                             state['in_buy_position'] = True
@@ -177,14 +176,14 @@ def run_monitor_loop():
 
                     elif ai_signal == 'SELL (AI)':
                         if ai_signal != state['last_ai_signal'] or price_changed_significantly:
-                            notification_message = f"🔴 {ticker}: AI SELL SIGNAL. Not in position. Staying out for now. Current price: {state['current_price']:.2f}. Rationale: {'; '.join(trade_details['rationale'])}"
+                            notification_message = f"🔴 {ticker}: SELL SIGNAL. Not in position. Staying out for now. Current price: {state['current_price']:.2f}. Rationale: {'; '.join(trade_details['rationale'])}"
                             state['last_ai_signal'] = ai_signal
                             state['last_notification_price'] = state['current_price']
                             logging.info(f"{stock_update_time} {notification_message}")
 
                     elif ai_signal == 'Hold (AI)':
                         if ai_signal != state['last_ai_signal'] or price_changed_significantly:
-                            notification_message = f"🔵 {ticker}: AI says HOLD. Current price: {state['current_price']:.2f}. Not in position. Rationale: {'; '.join(trade_details['rationale'])}"
+                            notification_message = f"🔵 {ticker}: HOLD. Current price: {state['current_price']:.2f}. Not in position. Rationale: {'; '.join(trade_details['rationale'])}"
                             state['last_ai_signal'] = ai_signal
                             state['last_notification_price'] = state['current_price']
                             logging.info(f"{stock_update_time} {notification_message}")

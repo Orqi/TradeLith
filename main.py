@@ -1,9 +1,7 @@
-# main.py (Updated Entry Point)
 import sys
 import logging
 import warnings
 
-# Suppress warnings for cleaner output
 warnings.filterwarnings("ignore", message=".*pkg_resources is deprecated as an API.*", category=UserWarning)
 warnings.simplefilter(action='ignore', category=FutureWarning)
 warnings.filterwarnings("ignore", message="X does not have valid feature names, but RandomForestClassifier was fitted with feature names", category=UserWarning)
@@ -19,7 +17,7 @@ from data_handler import fetch_data
 from indicator_calculator import calculate_indicators
 from feature_processor import create_target_variable
 from model_manager import train_and_save_model
-from monitor_loop import run_monitor_loop # Import the monitoring loop function
+from monitor_loop import run_monitor_loop
 
 
 if __name__ == "__main__":
@@ -62,7 +60,7 @@ if __name__ == "__main__":
 
     elif mode == 'monitor':
         logging.info("\n--- Starting Live Market Monitoring Mode ---")
-        run_monitor_loop() # Call the centralized monitoring loop function
+        run_monitor_loop() 
 
     else:
         print(f"Invalid mode: {mode}. Please use 'train' or 'monitor'.")

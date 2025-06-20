@@ -1,4 +1,3 @@
-# pattern_detector.py
 import pandas as pd
 import numpy as np
 import scipy.signal
@@ -7,10 +6,7 @@ import logging
 from config import VERBOSE_MODE
 
 def find_peaks_and_troughs(prices: pd.Series, order: int = 5) -> tuple[np.ndarray, np.ndarray]:
-    """
-    Identifies peaks and troughs in a price series using scipy.signal.find_peaks.
-    Returns indices of peaks and troughs.
-    """
+
     prices = pd.to_numeric(prices, errors='coerce').dropna()
     if prices.empty:
         return np.array([]), np.array([])
@@ -21,10 +17,7 @@ def find_peaks_and_troughs(prices: pd.Series, order: int = 5) -> tuple[np.ndarra
     return peaks, troughs
 
 def fit_trendline(prices: pd.Series, indices: np.ndarray) -> tuple[float, float, float]:
-    """
-    Fits a linear trendline to a set of prices at given array indices.
-    Returns the slope, intercept, and R-squared value.
-    """
+  
     if len(indices) < 2:
         return 0, 0, 0
 
@@ -54,18 +47,17 @@ def fit_trendline(prices: pd.Series, indices: np.ndarray) -> tuple[float, float,
     return model.coef_[0], model.intercept_, r_squared
 
 def is_flat(line_slope, tolerance=0.0001):
-    """Checks if a trendline is relatively flat."""
+ 
     return abs(line_slope) < tolerance
 
 def is_converging(slope1, slope2, is_rising_pattern=True):
-    """Checks if two trendlines are converging."""
+
     if is_rising_pattern:
         return slope1 > 0 and slope2 > 0 and slope1 > slope2
     else:
         return slope1 < 0 and slope2 < 0 and abs(slope2) > abs(slope1)
 
 def detect_double_top_bottom(df: pd.DataFrame, peaks: np.ndarray, troughs: np.ndarray, price_tolerance: float = 0.01) -> dict:
-    """Detects Double Top and Double Bottom patterns."""
     patterns = {'has_double_top': False, 'has_double_bottom': False}
     if len(df) < 50: return patterns
     close_prices = df['close']
@@ -102,7 +94,6 @@ def detect_double_top_bottom(df: pd.DataFrame, peaks: np.ndarray, troughs: np.nd
     return patterns
 
 def detect_triple_top_bottom(df: pd.DataFrame, peaks: np.ndarray, troughs: np.ndarray, price_tolerance: float = 0.015) -> dict:
-    """Detects Triple Top and Triple Bottom patterns."""
     patterns = {'has_triple_top': False, 'has_triple_bottom': False}
     if len(df) < 75: return patterns
     close_prices = df['close']
@@ -135,7 +126,6 @@ def detect_triple_top_bottom(df: pd.DataFrame, peaks: np.ndarray, troughs: np.nd
     return patterns
 
 def detect_head_and_shoulders_patterns(df: pd.DataFrame, peaks: np.ndarray, troughs: np.ndarray) -> dict:
-    """Detects Head and Shoulders (H&S) and Inverse H&S patterns."""
     patterns = {'has_head_and_shoulders': False, 'has_inverse_head_and_shoulders': False}
     if len(df) < 100: return patterns
     close_prices = df['close']
@@ -180,7 +170,6 @@ def detect_head_and_shoulders_patterns(df: pd.DataFrame, peaks: np.ndarray, trou
     return patterns
 
 def detect_wedge_patterns(df: pd.DataFrame, peaks: np.ndarray, troughs: np.ndarray, lookback_window: int = 50) -> dict:
-    """Detects Rising and Falling Wedge patterns."""
     patterns = {'has_rising_wedge': False, 'has_falling_wedge': False}
     if len(df) < lookback_window: return patterns
     close_prices = df['close']
@@ -200,7 +189,6 @@ def detect_wedge_patterns(df: pd.DataFrame, peaks: np.ndarray, troughs: np.ndarr
     return patterns
 
 def detect_triangle_patterns(df: pd.DataFrame, peaks: np.ndarray, troughs: np.ndarray, lookback_window: int = 50) -> dict:
-    """Detects Ascending, Descending, and Symmetrical Triangle patterns."""
     patterns = {'has_ascending_triangle': False, 'has_descending_triangle': False, 'has_symmetrical_triangle': False}
     if len(df) < lookback_window: return patterns
     close_prices = df['close']
@@ -222,10 +210,7 @@ def detect_triangle_patterns(df: pd.DataFrame, peaks: np.ndarray, troughs: np.nd
     return patterns
 
 def detect_flag_patterns(df: pd.DataFrame, min_pole_len: int = 10, min_flag_len: int = 5, pole_change_threshold: float = 0.05, consolidation_pct: float = 0.03) -> dict:
-    """
-    Basic detection for Bullish and Bearish Flags.
-    Looks for a strong move (pole) followed by a short, counter-trend consolidation (flag).
-    """
+
     patterns = {'has_bullish_flag': False, 'has_bearish_flag': False}
     if len(df) < (min_pole_len + min_flag_len + 1): return patterns
     close_prices = df['close']
@@ -259,10 +244,7 @@ def detect_flag_patterns(df: pd.DataFrame, min_pole_len: int = 10, min_flag_len:
     return patterns
 
 def detect_cup_and_handle_pattern(df: pd.DataFrame, lookback_window: int = 60, min_cup_depth_pct: float = 0.10) -> dict:
-    """
-    Basic detection for Cup and Handle pattern (bullish continuation).
-    Looks for a 'U' shape (cup) followed by a short downward drift (handle).
-    """
+
     patterns = {'has_cup_and_handle': False}
     if len(df) < lookback_window: return patterns
     close_prices = df['close']
@@ -287,9 +269,7 @@ def detect_cup_and_handle_pattern(df: pd.DataFrame, lookback_window: int = 60, m
     return patterns
 
 def detect_all_chart_patterns(df: pd.DataFrame, min_required_bars: int) -> dict:
-    """
-    Detects a comprehensive set of chart patterns and returns them as a dictionary of boolean flags.
-    """
+
     pattern_flags = {
         'has_double_top': False, 'has_double_bottom': False,
         'has_triple_top': False, 'has_triple_bottom': False,

@@ -1,20 +1,13 @@
-# trade_manager.py
 import pandas as pd
 from datetime import datetime
 import logging
 from config import (
     VERBOSE_MODE, INITIAL_STOP_LOSS_PERCENTAGE, TRAILING_STOP_LOSS_PERCENTAGE,
-    TAKE_PROFIT_PERCENTAGE, LIVE_DATA_INTERVAL, trade_log # Import global trade_log
+    TAKE_PROFIT_PERCENTAGE, LIVE_DATA_INTERVAL, trade_log
 )
 
-# NOTE: trade_log is imported as a global variable from config.py.
-# In a production system, this would be backed by a persistent database.
-
 def generate_trade_signals(signal: int, current_price: float, fundamental_data: dict, news_sentiment: dict, chart_patterns: dict, recent_high: float, recent_low: float) -> dict:
-    """
-    Generates actionable trade signals with entry, stop-loss, and take-profit levels.
-    These are heuristic-based for demonstration, integrating various data points.
-    """
+
     trade_info = {
         'signal': signal,
         'entry_price': round(current_price, 2),
@@ -111,7 +104,6 @@ def generate_trade_signals(signal: int, current_price: float, fundamental_data: 
     return trade_info
 
 def record_trade(ticker: str, trade_type: str, entry_price: float, exit_price: float = None, signal_time: str = None, trade_details: dict = None):
-    """Records a trade action in the global trade log."""
     log_entry = {
         'timestamp': signal_time if signal_time else datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'ticker': ticker,
@@ -129,7 +121,6 @@ def record_trade(ticker: str, trade_type: str, entry_price: float, exit_price: f
         logging.info(f"  [Trade Log] Recorded: {log_entry}")
 
 def print_trade_log():
-    """Prints a summary of trades recorded in the current session."""
     if not trade_log:
         logging.info("\n--- Trade Log (Current Session) ---")
         logging.info("No trades recorded in this session.")

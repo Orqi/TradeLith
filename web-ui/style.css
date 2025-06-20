@@ -1,71 +1,63 @@
-/* style.css */
 
-/* Global body styling to use Inter font if available */
 body {
     font-family: 'Inter', sans-serif;
 }
 
-/* Base styles for containers to ensure they are full width on small screens */
+
 section {
     width: 100%;
 }
 
-/* Responsive adjustments for sections in main layout */
+
 @media (min-width: 1024px) {
     main {
-        flex-direction: row; /* Horizontal layout on large screens */
+        flex-direction: row; 
     }
     section {
-        flex: 1; /* Distribute space equally */
+        flex: 1; 
     }
 }
 
-/* Table specific styling for better readability */
+
 #trade-log-container table {
-    width: 100%; /* Ensure table takes full width of its container */
-    border-collapse: separate; /* Allows border-radius on cells */
-    border-spacing: 0; /* No space between cells */
+    width: 100%; 
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 #trade-log-container th,
 #trade-log-container td {
-    padding: 12px 16px; /* Comfortable padding */
+    padding: 12px 16px;
     text-align: left;
-    white-space: nowrap; /* Prevent wrapping for small data */
+    white-space: nowrap; 
 }
 
 #trade-log-container thead th {
-    background-color: #e2e8f0; /* Light blue-gray for header */
-    color: #4a5568; /* Darker text for header */
-    font-weight: 600; /* Semi-bold */
-    border-bottom: 2px solid #cbd5e0; /* Separator line */
+    background-color: #e2e8f0;
+    color: #4a5568; 
+    font-weight: 600;
+    border-bottom: 2px solid #cbd5e0;
 }
 
 #trade-log-container tbody tr:nth-child(even) {
-    background-color: #f8fafc; /* Subtle striping for rows */
+    background-color: #f8fafc; 
 }
 
 #trade-log-container tbody tr:hover {
-    background-color: #e0f2fe; /* Light blue on hover for interactivity */
+    background-color: #e0f2fe;
 }
 
-/* Specific styling for P/L column for visual feedback */
+
 .positive-pl {
-    color: #10b981; /* Green for positive P/L */
+    color: #10b981; 
     font-weight: 600;
 }
 
 .negative-pl {
-    color: #ef4444; /* Red for negative P/L */
+    color: #ef4444;
     font-weight: 600;
 }
 
-/* Style for action buttons (e.g., Refresh) if added in future */
-button {
-    @apply px-4 py-2 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-}
-
-/* Simple animation for loading state */
 @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: .5; }
@@ -74,15 +66,25 @@ button {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Adjustments for smaller screens */
+
 @media (max-width: 640px) {
     #stock-states-container {
-        grid-template-columns: 1fr; /* Single column on extra small screens */
+        grid-template-columns: 1fr;
     }
     .text-3xl {
-        font-size: 2rem; /* Slightly smaller heading on small screens */
+        font-size: 2rem;
     }
     .p-4 {
-        padding: 1rem; /* Adjust padding */
+        padding: 1rem;
     }
 }
+@keyframes floatY {
+    0% { transform: translateY(0) scale(0.80); }
+    50% { transform: translateY(-10px) scale(0.80); }
+    100% { transform: translateY(0) scale(0.80); }
+  }
+  
+  .float-up-down {
+    animation: floatY 3s ease-in-out infinite;
+    transform-origin: top left;
+  }

@@ -1,4 +1,3 @@
-# model_manager.py
 import pandas as pd
 from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
 from sklearn.ensemble import RandomForestClassifier
@@ -101,8 +100,7 @@ def load_models_and_features() -> dict:
     """Loads all trained models and their associated features from the MODEL_DIR."""
     loaded_data = {}
     logging.info(f"Loading models from {MODEL_DIR}...")
-    # Iterate through all tickers defined in config
-    # Make sure to import STOCK_TICKERS from config
+    
     from config import STOCK_TICKERS 
     for ticker in STOCK_TICKERS:
         clean_ticker_name = ticker.replace('^', '')

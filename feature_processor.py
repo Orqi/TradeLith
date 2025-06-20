@@ -1,13 +1,10 @@
-# feature_processor.py
 import pandas as pd
 import numpy as np
 import logging
 from config import VERBOSE_MODE, ALWAYS_INCLUDED_FEATURES
 
 def create_target_variable(df: pd.DataFrame, future_periods: int, up_threshold: float, down_threshold: float) -> pd.DataFrame | None:
-    """
-    Creates a categorical target variable (Buy, Sell, Hold) based on future price movements.
-    """
+
     if df is None or df.empty:
         if VERBOSE_MODE:
             logging.warning("[Target Creation] Input DataFrame is empty or None. Cannot create target.")
@@ -23,9 +20,9 @@ def create_target_variable(df: pd.DataFrame, future_periods: int, up_threshold: 
     df_copy['future_close'] = df_copy['close'].shift(-future_periods)
     df_copy['price_change'] = (df_copy['future_close'] - df_copy['close']) / df_copy['close']
 
-    df_copy['target'] = 2 # Default to Hold
-    df_copy.loc[df_copy['price_change'] >= up_threshold, 'target'] = 1 # Buy
-    df_copy.loc[df_copy['price_change'] <= down_threshold, 'target'] = 0 # Sell
+    df_copy['target'] = 2
+    df_copy.loc[df_copy['price_change'] >= up_threshold, 'target'] = 1
+    df_copy.loc[df_copy['price_change'] <= down_threshold, 'target'] = 0
 
     df_copy.drop(columns=['future_close', 'price_change'], inplace=True)
     
@@ -42,10 +39,7 @@ def create_target_variable(df: pd.DataFrame, future_periods: int, up_threshold: 
     return df_copy
 
 def prepare_features_for_ai(df: pd.DataFrame, fundamental_data: dict = None, news_sentiment: dict = None, for_training: bool = True, known_features: list = None) -> tuple[pd.DataFrame, pd.Series | None, list | None]:
-    """
-    Prepares the DataFrame for AI model by selecting features and handling NaNs.
-    Adds fundamental data, news sentiment, and binary pattern features.
-    """
+
     logging.info("[Feature Prep] Preparing features for AI model...")
 
     df_processed = df.copy()
