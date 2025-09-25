@@ -8,4 +8,4 @@ python3 backend/app.py
 python3 main.py train
 source bot_env/bin/activate
 
-Image: image.png
+![Trade Bot](image.png)
